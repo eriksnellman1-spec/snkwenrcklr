@@ -5,12 +5,12 @@
  */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The VVS Automation System — Turn More HVAC Inquiries Into Booked Jobs</title>
-  <meta name="description" content="The VVS Automation System helps HVAC companies automate lead qualification, booking, follow-ups, and customer reactivation so no opportunity is lost." />
+  <title>VVS Automation System — Förvandla fler förfrågningar till bokade uppdrag</title>
+  <meta name="description" content="VVS Automation System hjälper VVS-företag att automatisera leadkvalificering, bokning, uppföljning och kundåteraktivering — så att inget tillfälle går förlorat." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -21,15 +21,15 @@
       --bg:          #080b12;
       --surface:     #0e1420;
       --surface2:    #131925;
-      --border:      rgba(255,255,255,0.07);
-      --border2:     rgba(255,255,255,0.12);
+      --border:      rgba(255,255,255,0.09);
+      --border2:     rgba(255,255,255,0.15);
       --accent:      #3b82f6;
       --accent-glow: rgba(59,130,246,0.35);
       --accent2:     #06b6d4;
       --green:       #10b981;
-      --text:        #f1f5f9;
-      --muted:       #94a3b8;
-      --muted2:      #64748b;
+      --text:        #ffffff;
+      --muted:       #cbd5e1;
+      --muted2:      #94a3b8;
       --radius:      12px;
       --radius-lg:   20px;
     }
@@ -50,7 +50,7 @@
       padding: 0 2rem;
       height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(8,11,18,0.8);
+      background: rgba(8,11,18,0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -93,8 +93,6 @@
       padding: 120px 2rem 80px;
       overflow: hidden;
     }
-
-    /* background radial glows */
     #hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -122,6 +120,7 @@
       line-height: 1.1;
       max-width: 820px;
       margin: 0 auto 24px;
+      color: #ffffff;
     }
     h1 .highlight {
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
@@ -196,7 +195,7 @@
       padding: 16px 18px;
     }
     .kpi-label { font-size: 0.72rem; color: var(--muted2); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 8px; }
-    .kpi-value { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.04em; }
+    .kpi-value { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.04em; color: #fff; }
     .kpi-delta { font-size: 0.72rem; font-weight: 600; color: var(--green); margin-top: 4px; }
 
     /* Pipeline */
@@ -210,10 +209,10 @@
 
     .pipeline-stages { display: flex; flex-direction: column; gap: 10px; }
     .stage-row { display: flex; align-items: center; gap: 12px; font-size: 0.82rem; }
-    .stage-label { width: 120px; color: var(--muted); white-space: nowrap; }
+    .stage-label { width: 130px; color: var(--muted); white-space: nowrap; }
     .stage-bar-wrap { flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
     .stage-bar { height: 100%; border-radius: 4px; }
-    .stage-count { font-weight: 700; font-size: 0.82rem; min-width: 28px; text-align: right; }
+    .stage-count { font-weight: 700; font-size: 0.82rem; min-width: 28px; text-align: right; color: #fff; }
 
     /* Activity feed */
     .activity-card {
@@ -233,8 +232,8 @@
     .activity-icon.green { background: rgba(16,185,129,0.15); color: var(--green); }
     .activity-icon.cyan  { background: rgba(6,182,212,0.15);  color: var(--accent2); }
     .activity-icon.amber { background: rgba(245,158,11,0.15); color: #f59e0b; }
-    .activity-text { font-size: 0.8rem; line-height: 1.5; }
-    .activity-text strong { color: var(--text); font-weight: 600; }
+    .activity-text { font-size: 0.8rem; line-height: 1.5; color: var(--muted); }
+    .activity-text strong { color: #ffffff; font-weight: 600; }
     .activity-time { font-size: 0.72rem; color: var(--muted2); }
 
     /* ── Section base styles ─────────────────────────── */
@@ -257,6 +256,7 @@
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 800; letter-spacing: -0.04em;
       line-height: 1.15; margin-bottom: 20px;
+      color: #ffffff;
     }
     .section-intro { font-size: 1.05rem; color: var(--muted); max-width: 520px; line-height: 1.75; }
 
@@ -283,7 +283,7 @@
       display: flex; align-items: center; justify-content: center;
       color: #ef4444;
     }
-    .problem-text strong { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .problem-text strong { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: #ffffff; }
     .problem-text span { font-size: 0.85rem; color: var(--muted); }
 
     .stat-block {
@@ -293,7 +293,6 @@
       padding: 36px;
       display: flex; flex-direction: column; gap: 28px;
     }
-    .big-stat { }
     .big-stat-num {
       font-size: 3.5rem; font-weight: 900; letter-spacing: -0.06em;
       background: linear-gradient(135deg, #ef4444, #f97316);
@@ -311,14 +310,13 @@
     .solution-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
     .sol-feature {
       display: flex; align-items: center; gap: 12px;
-      font-size: 0.9rem; color: var(--muted);
+      font-size: 0.92rem; color: var(--muted);
     }
     .sol-feature::before {
       content: '';
       width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
       background: rgba(16,185,129,0.15);
       border: 1.5px solid var(--green);
-      display: flex; align-items: center; justify-content: center;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%2310b981' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center;
     }
@@ -350,7 +348,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
-    .sys-node-label { font-size: 0.88rem; font-weight: 600; }
+    .sys-node-label { font-size: 0.88rem; font-weight: 600; color: #ffffff; }
     .sys-node-sub { font-size: 0.75rem; color: var(--muted2); }
     .sys-connector {
       width: 2px; height: 14px; margin-left: 31px;
@@ -393,7 +391,7 @@
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 18px; font-size: 1.3rem;
     }
-    .step-card h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .step-card h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; color: #ffffff; }
     .step-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
     /* ── Results ─────────────────────────────────────── */
@@ -427,6 +425,7 @@
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.02);
       font-size: 0.92rem; font-weight: 500;
+      color: var(--muted);
       transition: border-color .25s;
     }
     .who-item:hover { border-color: rgba(59,130,246,0.3); }
@@ -443,7 +442,7 @@
       border-radius: var(--radius-lg);
       padding: 36px;
     }
-    .fit-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .fit-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
     .fit-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
     .fit-tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .fit-tag {
@@ -491,7 +490,6 @@
       .steps-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
       nav { padding: 0 1rem; }
-      .nav-links { display: none; }
     }
     @media (max-width: 480px) {
       .kpi-row { grid-template-columns: 1fr 1fr; }
@@ -518,27 +516,27 @@
     <div class="nav-logo-dot"></div>
     VVS Automation System
   </div>
-  <a href="#cta" class="nav-cta">
-    Book a Demo
+  <a href="https://calendly.com/optelyofficial/15min" target="_blank" rel="noopener" class="nav-cta">
+    Boka en demo
     <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
   </a>
 </nav>
 
 <!-- ═══════════════════════════════════ HERO ══ -->
 <section id="hero">
-  <div class="badge fade-up"><div class="badge-dot"></div>For HVAC Companies</div>
+  <div class="badge fade-up"><div class="badge-dot"></div>För VVS-företag</div>
 
   <h1 class="fade-up delay-1">
-    Turn More HVAC Inquiries<br/>Into <span class="highlight">Booked Jobs</span> — Automatically
+    Förvandla fler VVS-förfrågningar<br/>till <span class="highlight">Bokade Uppdrag</span> — Automatiskt
   </h1>
 
   <p class="hero-sub fade-up delay-2">
-    The VVS Automation System helps HVAC companies automate lead qualification, booking,
-    follow-ups, and customer reactivation so no opportunity is ever lost.
+    VVS Automation System hjälper VVS-företag att automatisera leadkvalificering,
+    bokning, uppföljning och kundåteraktivering — så att inget tillfälle går förlorat.
   </p>
 
-  <a href="#cta" class="btn-primary fade-up delay-3">
-    Book a 15-Minute Demo
+  <a href="https://calendly.com/optelyofficial/15min" target="_blank" rel="noopener" class="btn-primary fade-up delay-3">
+    Boka en 15-minuters demo
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
   </a>
 
@@ -551,52 +549,52 @@
     <div class="dashboard-body">
       <div class="kpi-row">
         <div class="kpi">
-          <div class="kpi-label">New Leads</div>
+          <div class="kpi-label">Nya leads</div>
           <div class="kpi-value">48</div>
-          <div class="kpi-delta">↑ 14% this week</div>
+          <div class="kpi-delta">↑ 14% denna vecka</div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">Qualified</div>
+          <div class="kpi-label">Kvalificerade</div>
           <div class="kpi-value">31</div>
-          <div class="kpi-delta">↑ 22% this week</div>
+          <div class="kpi-delta">↑ 22% denna vecka</div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">Booked</div>
+          <div class="kpi-label">Bokade</div>
           <div class="kpi-value">19</div>
-          <div class="kpi-delta">↑ 31% this week</div>
+          <div class="kpi-delta">↑ 31% denna vecka</div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">Jobs Won</div>
+          <div class="kpi-label">Uppdrag vunna</div>
           <div class="kpi-value">12</div>
-          <div class="kpi-delta">↑ 18% this week</div>
+          <div class="kpi-delta">↑ 18% denna vecka</div>
         </div>
       </div>
 
       <div class="pipeline-card">
-        <div class="card-title">Pipeline stages</div>
+        <div class="card-title">Pipeline-steg</div>
         <div class="pipeline-stages">
           <div class="stage-row">
-            <div class="stage-label">New Inquiry</div>
+            <div class="stage-label">Ny förfrågan</div>
             <div class="stage-bar-wrap"><div class="stage-bar" style="width:100%;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
             <div class="stage-count">48</div>
           </div>
           <div class="stage-row">
-            <div class="stage-label">Qualified</div>
+            <div class="stage-label">Kvalificerad</div>
             <div class="stage-bar-wrap"><div class="stage-bar" style="width:65%;background:#3b82f6"></div></div>
             <div class="stage-count">31</div>
           </div>
           <div class="stage-row">
-            <div class="stage-label">Meeting Booked</div>
+            <div class="stage-label">Möte bokat</div>
             <div class="stage-bar-wrap"><div class="stage-bar" style="width:40%;background:#06b6d4"></div></div>
             <div class="stage-count">19</div>
           </div>
           <div class="stage-row">
-            <div class="stage-label">Quote Sent</div>
+            <div class="stage-label">Offert skickad</div>
             <div class="stage-bar-wrap"><div class="stage-bar" style="width:28%;background:#8b5cf6"></div></div>
             <div class="stage-count">13</div>
           </div>
           <div class="stage-row">
-            <div class="stage-label">Job Won</div>
+            <div class="stage-label">Uppdrag vunnet</div>
             <div class="stage-bar-wrap"><div class="stage-bar" style="width:25%;background:#10b981"></div></div>
             <div class="stage-count">12</div>
           </div>
@@ -604,34 +602,34 @@
       </div>
 
       <div class="activity-card">
-        <div class="card-title">Live activity</div>
+        <div class="card-title">Live-aktivitet</div>
         <div class="activity-list">
           <div class="activity-item">
             <div class="activity-icon green">✓</div>
             <div>
-              <div class="activity-text"><strong>Lars Hansen</strong> booked a meeting</div>
-              <div class="activity-time">2 min ago · Automatic booking</div>
+              <div class="activity-text"><strong>Lars Hansen</strong> bokade ett möte</div>
+              <div class="activity-time">2 min sedan · Automatisk bokning</div>
             </div>
           </div>
           <div class="activity-item">
             <div class="activity-icon blue">⚡</div>
             <div>
-              <div class="activity-text"><strong>New inquiry</strong> qualified automatically</div>
-              <div class="activity-time">8 min ago · Lead qualification</div>
+              <div class="activity-text"><strong>Ny förfrågan</strong> kvalificerades automatiskt</div>
+              <div class="activity-time">8 min sedan · Leadkvalificering</div>
             </div>
           </div>
           <div class="activity-item">
             <div class="activity-icon cyan">↩</div>
             <div>
-              <div class="activity-text"><strong>Old quote</strong> reactivated — response received</div>
-              <div class="activity-time">14 min ago · Quote reactivation</div>
+              <div class="activity-text"><strong>Gammal offert</strong> återaktiverad — svar mottaget</div>
+              <div class="activity-time">14 min sedan · Offertåteraktivering</div>
             </div>
           </div>
           <div class="activity-item">
             <div class="activity-icon amber">★</div>
             <div>
-              <div class="activity-text"><strong>5-star review</strong> received from Mette Nielsen</div>
-              <div class="activity-time">1 hr ago · Review engine</div>
+              <div class="activity-text"><strong>5-stjärnig recension</strong> mottagen från Mette Nielsen</div>
+              <div class="activity-time">1 tim sedan · Recensionsmotor</div>
             </div>
           </div>
         </div>
@@ -644,8 +642,8 @@
 <!-- ═══════════════════════════════════ PROBLEM ═ -->
 <section id="problem" class="section-pad">
   <div class="container">
-    <div class="section-label">The Problem</div>
-    <h2>You already get enough inquiries.<br/>You're just losing them.</h2>
+    <div class="section-label">Problemet</div>
+    <h2>Du får redan tillräckligt med förfrågningar.<br/>Du tappar bara bort dem.</h2>
 
     <div class="problem-grid">
       <div class="problem-list">
@@ -654,8 +652,8 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div class="problem-text">
-            <strong>Inquiries sit unanswered</strong>
-            <span>Leads reach out and hear nothing back — and call a competitor instead.</span>
+            <strong>Förfrågningar lämnas obesvarade</strong>
+            <span>Leads hör av sig och får inget svar — och ringer en konkurrent istället.</span>
           </div>
         </div>
         <div class="problem-item">
@@ -663,8 +661,8 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           </div>
           <div class="problem-text">
-            <strong>No structured sales process</strong>
-            <span>Without a pipeline, follow-ups are forgotten and deals fall through the cracks.</span>
+            <strong>Ingen strukturerad säljprocess</strong>
+            <span>Utan ett pipeline glöms uppföljningar bort och affärer faller igenom sprickorna.</span>
           </div>
         </div>
         <div class="problem-item">
@@ -672,8 +670,8 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
           </div>
           <div class="problem-text">
-            <strong>Follow-ups are manual and inconsistent</strong>
-            <span>Relying on memory means most prospects never hear back after the first contact.</span>
+            <strong>Uppföljning är manuell och inkonsekvent</strong>
+            <span>Att förlita sig på minnet innebär att de flesta prospekts aldrig hör av sig igen.</span>
           </div>
         </div>
         <div class="problem-item">
@@ -681,8 +679,8 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
           <div class="problem-text">
-            <strong>Quotes go cold — and are never followed up</strong>
-            <span>Sent quotes are forgotten. No reactivation means lost revenue sitting on the table.</span>
+            <strong>Offerter blir kalla — och följs aldrig upp</strong>
+            <span>Skickade offerter glöms bort. Ingen återaktivering innebär förlorade intäkter.</span>
           </div>
         </div>
         <div class="problem-item">
@@ -690,8 +688,8 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
           <div class="problem-text">
-            <strong>Past customers are never re-contacted</strong>
-            <span>Your best leads are already customers — but no system brings them back.</span>
+            <strong>Tidigare kunder kontaktas aldrig igen</strong>
+            <span>Dina bästa leads är redan kunder — men inget system tar tillbaka dem.</span>
           </div>
         </div>
       </div>
@@ -699,17 +697,17 @@
       <div class="stat-block">
         <div class="big-stat">
           <div class="big-stat-num">78%</div>
-          <div class="big-stat-label">of customers choose the first company that responds to them</div>
+          <div class="big-stat-label">av kunderna väljer det första företaget som svarar dem</div>
         </div>
         <div class="divider"></div>
         <div class="big-stat">
           <div class="big-stat-num">5×</div>
-          <div class="big-stat-label">more likely to qualify a lead when you respond within 5 minutes</div>
+          <div class="big-stat-label">mer sannolikt att kvalificera ett lead när du svarar inom 5 minuter</div>
         </div>
         <div class="divider"></div>
         <div class="big-stat">
           <div class="big-stat-num">60%</div>
-          <div class="big-stat-label">of deals close in the follow-up — not the first contact</div>
+          <div class="big-stat-label">av affärer stängs i uppföljningen — inte vid första kontakten</div>
         </div>
       </div>
     </div>
@@ -721,63 +719,63 @@
   <div class="container">
     <div class="solution-inner">
       <div>
-        <div class="section-label">The Solution</div>
-        <h2>A system that handles your entire customer flow — automatically</h2>
+        <div class="section-label">Lösningen</div>
+        <h2>Ett system som hanterar hela ditt kundflöde — automatiskt</h2>
         <p class="section-intro">
-          The VVS Automation System is a structured, end-to-end pipeline that qualifies leads,
-          books meetings, sends follow-ups, reactivates old quotes, and generates reviews —
-          without manual effort.
+          VVS Automation System är en strukturerad, heltäckande pipeline som kvalificerar leads,
+          bokar möten, skickar uppföljningar, återaktiverar gamla offerter och genererar recensioner
+          — utan manuellt arbete.
         </p>
         <div class="solution-features">
-          <div class="sol-feature">Instant lead qualification — 24/7, no manual screening</div>
-          <div class="sol-feature">Direct calendar booking for qualified prospects</div>
-          <div class="sol-feature">Automated follow-up sequences that never miss a deal</div>
-          <div class="sol-feature">Quote reactivation that revives cold opportunities</div>
-          <div class="sol-feature">Review and referral engine that compounds growth</div>
-          <div class="sol-feature">Full pipeline visibility — always know where every lead stands</div>
+          <div class="sol-feature">Omedelbar leadkvalificering — 24/7, ingen manuell granskning</div>
+          <div class="sol-feature">Direkt kalenderbokning för kvalificerade prospekts</div>
+          <div class="sol-feature">Automatiserade uppföljningssekvenser som aldrig missar en affär</div>
+          <div class="sol-feature">Offertåteraktivering som väcker kalla möjligheter till liv</div>
+          <div class="sol-feature">Recensions- och hänvisningsmotor som förstärker tillväxten</div>
+          <div class="sol-feature">Full pipeline-synlighet — alltid veta var varje lead befinner sig</div>
         </div>
       </div>
 
       <div class="system-visual">
-        <div class="card-title" style="margin-bottom:20px">How leads flow through the system</div>
+        <div class="card-title" style="margin-bottom:20px">Hur leads flödar genom systemet</div>
         <div class="sys-flow">
           <div class="sys-node">
             <div class="sys-node-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;">📥</div>
             <div>
-              <div class="sys-node-label">Inquiry Received</div>
-              <div class="sys-node-sub">Via website, ads, or referral</div>
+              <div class="sys-node-label">Förfrågan mottagen</div>
+              <div class="sys-node-sub">Via webbplats, annonser eller hänvisning</div>
             </div>
           </div>
           <div class="sys-connector"></div>
           <div class="sys-node">
             <div class="sys-node-icon" style="background:rgba(6,182,212,0.12);color:#06b6d4;">🔍</div>
             <div>
-              <div class="sys-node-label">Automatic Qualification</div>
-              <div class="sys-node-sub">Key questions asked instantly</div>
+              <div class="sys-node-label">Automatisk kvalificering</div>
+              <div class="sys-node-sub">Nyckelfrågor ställs omedelbart</div>
             </div>
           </div>
           <div class="sys-connector"></div>
           <div class="sys-node">
             <div class="sys-node-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">📅</div>
             <div>
-              <div class="sys-node-label">Meeting Booked</div>
-              <div class="sys-node-sub">Directly into your calendar</div>
+              <div class="sys-node-label">Möte bokat</div>
+              <div class="sys-node-sub">Direkt in i din kalender</div>
             </div>
           </div>
           <div class="sys-connector"></div>
           <div class="sys-node">
             <div class="sys-node-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">⚙️</div>
             <div>
-              <div class="sys-node-label">Automated Follow-Up</div>
-              <div class="sys-node-sub">Reminders & reactivation</div>
+              <div class="sys-node-label">Automatiserad uppföljning</div>
+              <div class="sys-node-sub">Påminnelser & återaktivering</div>
             </div>
           </div>
           <div class="sys-connector"></div>
           <div class="sys-node">
             <div class="sys-node-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">✅</div>
             <div>
-              <div class="sys-node-label">Job Won + Review Requested</div>
-              <div class="sys-node-sub">Automatic review & referral ask</div>
+              <div class="sys-node-label">Uppdrag vunnet + Recension begärd</div>
+              <div class="sys-node-sub">Automatisk recensions- & hänvisningsbegäran</div>
             </div>
           </div>
         </div>
@@ -790,47 +788,47 @@
 <section id="steps" class="section-pad">
   <div class="container">
     <div style="text-align:center;max-width:600px;margin:0 auto;">
-      <div class="section-label" style="justify-content:center;">How It Works</div>
-      <h2>Five steps. Fully automated.</h2>
+      <div class="section-label" style="justify-content:center;">Hur det fungerar</div>
+      <h2>Fem steg. Helt automatiserat.</h2>
       <p class="section-intro" style="margin:0 auto;">
-        Every part of your sales process — from first contact to repeat business — runs on autopilot.
+        Varje del av din säljprocess — från första kontakt till återkommande affärer — körs på autopilot.
       </p>
     </div>
     <div class="steps-grid">
 
       <div class="step-card">
-        <div class="step-number">Step 01</div>
+        <div class="step-number">Steg 01</div>
         <div class="step-icon">🔍</div>
-        <h3>Lead Qualification</h3>
-        <p>The system automatically sends qualifying questions to every new inquiry, filters out unserious leads, and ensures only high-intent prospects move forward.</p>
+        <h3>Leadkvalificering</h3>
+        <p>Systemet skickar automatiskt kvalificerande frågor till varje ny förfrågan, filtrerar bort oseriösa leads och säkerställer att bara högintresserade prospekts går vidare.</p>
       </div>
 
       <div class="step-card">
-        <div class="step-number">Step 02</div>
+        <div class="step-number">Steg 02</div>
         <div class="step-icon">📅</div>
-        <h3>Booking & Scheduling</h3>
-        <p>Qualified prospects are guided to book directly into your calendar — no back-and-forth, no manual coordination required.</p>
+        <h3>Bokning & schemaläggning</h3>
+        <p>Kvalificerade prospekts guidas att boka direkt in i din kalender — ingen fram och tillbaka, ingen manuell koordinering krävs.</p>
       </div>
 
       <div class="step-card">
-        <div class="step-number">Step 03</div>
+        <div class="step-number">Steg 03</div>
         <div class="step-icon">📊</div>
-        <h3>Pipeline Visibility & Follow-Up</h3>
-        <p>Every lead is tracked in a structured CRM pipeline. Automated follow-up sequences run in the background, keeping every opportunity warm.</p>
+        <h3>Pipeline-synlighet & uppföljning</h3>
+        <p>Varje lead spåras i ett strukturerat CRM-pipeline. Automatiserade uppföljningssekvenser körs i bakgrunden och håller varje möjlighet varm.</p>
       </div>
 
       <div class="step-card">
-        <div class="step-number">Step 04</div>
+        <div class="step-number">Steg 04</div>
         <div class="step-icon">🔔</div>
-        <h3>No-Show & Quote Reactivation</h3>
-        <p>Automatic reminders reduce no-shows before meetings. Cold quotes are reactivated with timed messages that bring old opportunities back to life.</p>
+        <h3>No-Show & offertåteraktivering</h3>
+        <p>Automatiska påminnelser minskar no-shows före möten. Kalla offerter återaktiveras med tajmade meddelanden som väcker gamla möjligheter till liv.</p>
       </div>
 
       <div class="step-card">
-        <div class="step-number">Step 05</div>
+        <div class="step-number">Steg 05</div>
         <div class="step-icon">⭐</div>
-        <h3>Review & Referral Engine</h3>
-        <p>After a completed job, satisfied customers are automatically asked for reviews and referrals — generating more leads without any extra effort.</p>
+        <h3>Recensions- & hänvisningsmotor</h3>
+        <p>Efter ett avslutat uppdrag ombeds nöjda kunder automatiskt om recensioner och hänvisningar — vilket genererar fler leads utan extra ansträngning.</p>
       </div>
 
     </div>
@@ -841,29 +839,29 @@
 <section id="results" class="section-pad">
   <div class="container">
     <div style="text-align:center;max-width:600px;margin:0 auto 60px;">
-      <div class="section-label" style="justify-content:center;">Results</div>
-      <h2>What HVAC companies see after implementation</h2>
+      <div class="section-label" style="justify-content:center;">Resultat</div>
+      <h2>Vad VVS-företag ser efter implementation</h2>
     </div>
     <div class="results-grid">
       <div class="result-card">
         <span class="result-value">+40%</span>
-        <div class="result-label">More booked jobs from the same number of inquiries</div>
+        <div class="result-label">Fler bokade uppdrag från samma antal förfrågningar</div>
       </div>
       <div class="result-card">
         <span class="result-value">~0</span>
-        <div class="result-label">Missed inquiries — every lead enters the system automatically</div>
+        <div class="result-label">Missade förfrågningar — varje lead registreras automatiskt i systemet</div>
       </div>
       <div class="result-card">
         <span class="result-value">−80%</span>
-        <div class="result-label">Less manual follow-up time spent by the team</div>
+        <div class="result-label">Mindre manuell uppföljningstid för teamet</div>
       </div>
       <div class="result-card">
         <span class="result-value">100%</span>
-        <div class="result-label">Pipeline visibility — know exactly where every deal stands</div>
+        <div class="result-label">Pipeline-synlighet — vet exakt var varje affär befinner sig</div>
       </div>
       <div class="result-card">
         <span class="result-value">10h+</span>
-        <div class="result-label">Hours saved every week on admin, calls, and follow-up</div>
+        <div class="result-label">Timmar sparade varje vecka på administration, samtal och uppföljning</div>
       </div>
     </div>
   </div>
@@ -874,48 +872,48 @@
   <div class="container">
     <div class="who-grid">
       <div>
-        <div class="section-label">Who It's For</div>
-        <h2>Built for HVAC companies ready to scale</h2>
+        <div class="section-label">För vem</div>
+        <h2>Byggd för VVS-företag som är redo att växa</h2>
         <p class="section-intro" style="margin-bottom:32px;">
-          The VVS Automation System is designed for companies that already generate
-          inquiries and want to convert more of them — without hiring more staff.
+          VVS Automation System är designat för företag som redan genererar förfrågningar
+          och vill konvertera fler av dem — utan att anställa mer personal.
         </p>
         <div class="who-list">
           <div class="who-item">
             <div class="who-item-icon">📣</div>
-            You run ads or have a website generating inbound inquiries
+            Du kör annonser eller har en webbplats som genererar inkommande förfrågningar
           </div>
           <div class="who-item">
             <div class="who-item-icon">📈</div>
-            You want to book more jobs from the leads you already receive
+            Du vill boka fler uppdrag från de leads du redan får
           </div>
           <div class="who-item">
             <div class="who-item-icon">🤖</div>
-            You want to automate customer communication and follow-up
+            Du vill automatisera kundkommunikation och uppföljning
           </div>
           <div class="who-item">
             <div class="who-item-icon">🗂️</div>
-            You want a structured, repeatable sales process — not chaos
+            Du vill ha en strukturerad, repeterbar säljprocess — inte kaos
           </div>
           <div class="who-item">
             <div class="who-item-icon">⏱️</div>
-            You want to save time and stop relying on memory for follow-up
+            Du vill spara tid och sluta förlita dig på minnet för uppföljning
           </div>
         </div>
       </div>
 
       <div class="fit-box">
-        <h3>This system is the right fit if you are...</h3>
-        <p>An HVAC company with an active lead flow that wants to turn more inquiries into revenue — without adding complexity or headcount.</p>
+        <h3>Det här systemet passar dig om du är...</h3>
+        <p>Ett VVS-företag med ett aktivt leadflöde som vill förvandla fler förfrågningar till intäkter — utan att lägga till komplexitet eller personal.</p>
         <div class="fit-tag-list">
-          <span class="fit-tag">HVAC / VVS company</span>
-          <span class="fit-tag">1–20 employees</span>
-          <span class="fit-tag">Running ads</span>
-          <span class="fit-tag">Website traffic</span>
-          <span class="fit-tag">Referral-based</span>
-          <span class="fit-tag">Growth focused</span>
-          <span class="fit-tag">Wants automation</span>
-          <span class="fit-tag">Wants more jobs</span>
+          <span class="fit-tag">VVS-företag</span>
+          <span class="fit-tag">1–20 anställda</span>
+          <span class="fit-tag">Kör annonser</span>
+          <span class="fit-tag">Webbtrafik</span>
+          <span class="fit-tag">Hänvisningsbaserat</span>
+          <span class="fit-tag">Tillväxtfokuserat</span>
+          <span class="fit-tag">Vill ha automation</span>
+          <span class="fit-tag">Vill ha fler uppdrag</span>
         </div>
       </div>
     </div>
@@ -925,17 +923,17 @@
 <!-- ═══════════════════════════════════ CTA ═════ -->
 <section id="cta" class="section-pad">
   <div class="container">
-    <div class="section-label" style="justify-content:center;">Get Started</div>
-    <h2>See How The VVS Automation System Works</h2>
+    <div class="section-label" style="justify-content:center;">Kom igång</div>
+    <h2>Se hur VVS Automation System fungerar</h2>
     <p>
-      Book a free 15-minute demo. We'll walk you through exactly how the system works
-      and show you what it would look like for your business.
+      Boka en gratis 15-minuters demo. Vi går igenom exakt hur systemet fungerar
+      och visar hur det skulle se ut för ditt företag.
     </p>
-    <a href="#" class="btn-primary" style="display:inline-flex;">
-      Book a Demo
+    <a href="https://calendly.com/optelyofficial/15min" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;">
+      Boka en demo
       <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
     </a>
-    <div class="cta-note">Free · No commitment · 15 minutes</div>
+    <div class="cta-note">Gratis · Ingen förpliktelse · 15 minuter</div>
   </div>
 </section>
 
@@ -943,12 +941,11 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">VVS Automation System</div>
-    <div>© <?php echo date('Y'); ?> VVS Automation System. All rights reserved.</div>
+    <div>© <?php echo date('Y'); ?> VVS Automation System. Alla rättigheter förbehållna.</div>
   </div>
 </footer>
 
 <script>
-  // Intersection observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
