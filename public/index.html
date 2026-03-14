@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downloads Preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid #222;
+      background: #141414;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .header-left p {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .stats span strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      padding: 20px 32px 0;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #888;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { border-color: #555; color: #ccc; }
+    .filter-btn.active { background: #fff; color: #000; border-color: #fff; font-weight: 500; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 24px 32px 32px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border: 1px solid #252525;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .card:hover { transform: translateY(-2px); border-color: #3a3a3a; }
+    .card.deleting { opacity: 0.4; pointer-events: none; transition: opacity 0.3s; }
+
+    .media-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .media-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(0,0,0,0.65);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .play-icon svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+
+    .type-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .card-footer {
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .file-info { overflow: hidden; flex: 1; }
+
+    .file-name {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #ddd;
+    }
+
+    .file-meta {
+      font-size: 11px;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    .delete-btn {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .delete-btn:hover { background: #ff3b30; border-color: #ff3b30; color: #fff; }
+    .delete-btn svg { width: 15px; height: 15px; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lightbox-inner img,
+    .lightbox-inner video {
+      max-width: 90vw;
+      max-height: 75vh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .lightbox-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .lb-btn {
+      padding: 9px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .lb-btn:hover { opacity: 0.85; }
+    .lb-btn.close { background: #2a2a2a; color: #ccc; }
+    .lb-btn.delete { background: #ff3b30; color: #fff; }
+
+    .lb-filename {
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+    }
+
+    .lightbox-close-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    /* Empty state */
+    .empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 32px;
+      color: #444;
+      text-align: center;
+    }
+
+    .empty svg { width: 56px; height: 56px; margin-bottom: 16px; opacity: 0.4; }
+    .empty h2 { font-size: 18px; font-weight: 500; color: #555; }
+    .empty p { font-size: 14px; margin-top: 8px; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1f1f1f;
+      border: 1px solid #333;
+      color: #ddd;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      z-index: 2000;
+      transition: transform 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.error { border-color: #ff3b30; color: #ff3b30; }
+    .toast.success { border-color: #30d158; color: #30d158; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Downloads Preview</h1>
+    <p id="dir-label">Loading...</p>
+  </div>
+  <div class="stats">
+    <span><strong id="count-all">0</strong> total</span>
+    <span><strong id="count-images">0</strong> images</span>
+    <span><strong id="count-videos">0</strong> videos</span>
+  </div>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="image">Images</button>
+  <button class="filter-btn" data-filter="video">Videos</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close-bg" id="lb-bg"></div>
+  <div class="lightbox-inner">
+    <div id="lb-media"></div>
+    <p class="lb-filename" id="lb-filename"></p>
+    <div class="lightbox-actions">
+      <button class="lb-btn close" id="lb-close">Close</button>
+      <button class="lb-btn delete" id="lb-delete">Move to Trash</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let allFiles = [];
+  let currentFilter = 'all';
+  let lightboxFile = null;
+
+  const grid = document.getElementById('grid');
+  const lightbox = document.getElementById('lightbox');
+  const lbMedia = document.getElementById('lb-media');
+  const lbFilename = document.getElementById('lb-filename');
+  const lbDelete = document.getElementById('lb-delete');
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+
+  function formatDate(iso) {
+    return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function showToast(msg, type = '') {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast show ' + type;
+    setTimeout(() => { toast.className = 'toast ' + type; }, 2800);
+  }
+
+  async function loadFiles() {
+    try {
+      const res = await fetch('/api/files');
+      const data = await res.json();
+      allFiles = data.files;
+      document.getElementById('dir-label').textContent = data.downloadsDir;
+      renderGrid();
+      updateStats();
+    } catch (e) {
+      showToast('Failed to load files', 'error');
+    }
+  }
+
+  function updateStats() {
+    document.getElementById('count-all').textContent = allFiles.length;
+    document.getElementById('count-images').textContent = allFiles.filter(f => f.type === 'image').length;
+    document.getElementById('count-videos').textContent = allFiles.filter(f => f.type === 'video').length;
+  }
+
+  function renderGrid() {
+    const filtered = currentFilter === 'all' ? allFiles : allFiles.filter(f => f.type === currentFilter);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="empty" style="grid-column:1/-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 7h18M3 12h18M3 17h18"/>
+          </svg>
+          <h2>No ${currentFilter === 'all' ? 'media' : currentFilter + 's'} found</h2>
+          <p>Add images or videos to your Downloads folder</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(file => `
+      <div class="card" id="card-${CSS.escape(file.name)}" data-name="${escAttr(file.name)}" data-type="${file.type}">
+        <div class="media-wrap" onclick="openLightbox('${escJs(file.name)}')">
+          ${file.type === 'image'
+            ? `<img src="/api/preview/${encodeURIComponent(file.name)}" loading="lazy" alt="${escAttr(file.name)}" />`
+            : `<video src="/api/preview/${encodeURIComponent(file.name)}" preload="metadata" muted></video>
+               <div class="play-icon"><svg viewBox="0 0 10 12"><path d="M0 0l10 6L0 12z"/></svg></div>`
+          }
+          <span class="type-badge">${file.type === 'image' ? 'IMG' : 'VID'}</span>
+        </div>
+        <div class="card-footer">
+          <div class="file-info">
+            <div class="file-name" title="${escAttr(file.name)}">${escHtml(file.name)}</div>
+            <div class="file-meta">${formatSize(file.size)} &middot; ${formatDate(file.modified)}</div>
+          </div>
+          <button class="delete-btn" title="Move to Trash" onclick="deleteFile('${escJs(file.name)}', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function escAttr(s) {
+    return s.replace(/"/g, '&quot;');
+  }
+  function escJs(s) {
+    return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  }
+
+  async function deleteFile(name, event) {
+    if (event) event.stopPropagation();
+
+    const card = document.getElementById('card-' + CSS.escape(name));
+    if (card) card.classList.add('deleting');
+
+    try {
+      const res = await fetch('/api/files/' + encodeURIComponent(name), { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      allFiles = allFiles.filter(f => f.name !== name);
+      updateStats();
+      renderGrid();
+      showToast(`"${name}" moved to Trash`, 'success');
+
+      if (lightboxFile === name) closeLightbox();
+    } catch (e) {
+      if (card) card.classList.remove('deleting');
+      showToast('Failed to delete: ' + e.message, 'error');
+    }
+  }
+
+  function openLightbox(name) {
+    const file = allFiles.find(f => f.name === name);
+    if (!file) return;
+    lightboxFile = name;
+    lbFilename.textContent = name;
+
+    if (file.type === 'image') {
+      lbMedia.innerHTML = `<img src="/api/preview/${encodeURIComponent(name)}" alt="${escAttr(name)}" />`;
+    } else {
+      lbMedia.innerHTML = `<video src="/api/preview/${encodeURIComponent(name)}" controls autoplay></video>`;
+    }
+
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lbMedia.innerHTML = '';
+    lightboxFile = null;
+  }
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderGrid();
+    });
+  });
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-bg').addEventListener('click', closeLightbox);
+  document.getElementById('lb-delete').addEventListener('click', () => {
+    if (lightboxFile) deleteFile(lightboxFile);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  loadFiles();
+</script>
+</body>
+</html>
