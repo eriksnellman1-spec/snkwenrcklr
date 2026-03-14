@@ -241,6 +241,29 @@
     .lb-btn.close { background: #2a2a2a; color: #ccc; }
     .lb-btn.delete { background: #ff3b30; color: #fff; }
 
+    .lb-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      z-index: 1010;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.18); }
+    .lb-nav.prev { left: 20px; }
+    .lb-nav.next { right: 20px; }
+    .lb-nav:disabled { opacity: 0.2; cursor: default; }
+
     .lb-filename {
       font-size: 13px;
       color: #888;
@@ -315,6 +338,7 @@
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-close-bg" id="lb-bg"></div>
+  <button class="lb-nav prev" id="lb-prev">&#8592;</button>
   <div class="lightbox-inner">
     <div id="lb-media"></div>
     <p class="lb-filename" id="lb-filename"></p>
@@ -323,6 +347,7 @@
       <button class="lb-btn delete" id="lb-delete">Move to Trash</button>
     </div>
   </div>
+  <button class="lb-nav next" id="lb-next">&#8594;</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -460,6 +485,7 @@
     }
 
     lightbox.classList.add('open');
+    updateNavButtons();
   }
 
   function closeLightbox() {
@@ -478,14 +504,39 @@
     });
   });
 
+  function getFilteredFiles() {
+    if (currentFilter === 'all') return allFiles;
+    return allFiles.filter(f => f.type === currentFilter);
+  }
+
+  function navigateLightbox(dir) {
+    const files = getFilteredFiles();
+    const idx = files.findIndex(f => f.name === lightboxFile);
+    if (idx === -1) return;
+    const next = files[idx + dir];
+    if (next) openLightbox(next.name);
+  }
+
+  function updateNavButtons() {
+    const files = getFilteredFiles();
+    const idx = files.findIndex(f => f.name === lightboxFile);
+    document.getElementById('lb-prev').disabled = idx <= 0;
+    document.getElementById('lb-next').disabled = idx >= files.length - 1;
+  }
+
   document.getElementById('lb-close').addEventListener('click', closeLightbox);
   document.getElementById('lb-bg').addEventListener('click', closeLightbox);
   document.getElementById('lb-delete').addEventListener('click', () => {
     if (lightboxFile) deleteFile(lightboxFile);
   });
+  document.getElementById('lb-prev').addEventListener('click', () => navigateLightbox(-1));
+  document.getElementById('lb-next').addEventListener('click', () => navigateLightbox(1));
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
+    if (!lightboxFile) return;
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
   });
 
   loadFiles();
