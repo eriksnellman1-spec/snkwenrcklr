@@ -49,13 +49,22 @@ function moveToTrash(filename) {
   if (!resolved.startsWith(path.resolve(DOWNLOADS_DIR))) {
     throw new Error('Invalid file path');
   }
-  try {
-    execSync(`gio trash "${resolved.replace(/"/g, '\\"')}"`, { stdio: 'pipe' });
-  } catch {
-    // Fallback: move to trash manually
-    fs.mkdirSync(TRASH_DIR, { recursive: true });
-    const dest = path.join(TRASH_DIR, filename);
-    fs.renameSync(resolved, dest);
+
+  const safe = resolved.replace(/"/g, '\\"');
+  const platform = process.platform;
+
+  if (platform === 'darwin') {
+    // macOS: use AppleScript to move to Trash (preserves Undo in Finder)
+    execSync(`osascript -e 'tell app "Finder" to delete POSIX file "${safe}"'`, { stdio: 'pipe' });
+  } else {
+    // Linux: try gio, fall back to manual Trash
+    try {
+      execSync(`gio trash "${safe}"`, { stdio: 'pipe' });
+    } catch {
+      const trashDir = path.join(process.env.HOME, '.local', 'share', 'Trash', 'files');
+      fs.mkdirSync(trashDir, { recursive: true });
+      fs.renameSync(resolved, path.join(trashDir, filename));
+    }
   }
 }
 
