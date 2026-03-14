@@ -82,7 +82,7 @@ app.get('/api/files', (req, res) => {
   }
 });
 
-// Serve a file for preview
+// Serve a file for preview (with range request support for video streaming)
 app.get('/api/preview/:filename', (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(DOWNLOADS_DIR, filename);
@@ -94,7 +94,29 @@ app.get('/api/preview/:filename', (req, res) => {
   if (!fs.existsSync(resolved)) {
     return res.status(404).json({ error: 'File not found' });
   }
-  res.sendFile(resolved);
+
+  const stat = fs.statSync(resolved);
+  const total = stat.size;
+  const range = req.headers.range;
+
+  if (range) {
+    const [startStr, endStr] = range.replace(/bytes=/, '').split('-');
+    const start = parseInt(startStr, 10);
+    const end = endStr ? parseInt(endStr, 10) : total - 1;
+    const chunkSize = end - start + 1;
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${total}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunkSize,
+    });
+    fs.createReadStream(resolved, { start, end }).pipe(res);
+  } else {
+    res.writeHead(200, {
+      'Accept-Ranges': 'bytes',
+      'Content-Length': total,
+    });
+    fs.createReadStream(resolved).pipe(res);
+  }
 });
 
 // Delete (move to trash)
