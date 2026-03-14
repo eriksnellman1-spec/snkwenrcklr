@@ -419,7 +419,7 @@
         <div class="media-wrap" onclick="openLightbox('${escJs(file.name)}')">
           ${file.type === 'image'
             ? `<img src="/api/preview/${encodeURIComponent(file.name)}" loading="lazy" alt="${escAttr(file.name)}" />`
-            : `<video src="/api/preview/${encodeURIComponent(file.name)}" preload="metadata" muted></video>
+            : `<video src="/api/preview/${encodeURIComponent(file.name)}" preload="none" muted></video>
                <div class="play-icon"><svg viewBox="0 0 10 12"><path d="M0 0l10 6L0 12z"/></svg></div>`
           }
           <span class="type-badge">${file.type === 'image' ? 'IMG' : 'VID'}</span>
